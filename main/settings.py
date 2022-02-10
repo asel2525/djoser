@@ -9,23 +9,33 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
+import os
+
+import environ
+from pathlib import Path
 from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure-zg_^-b!f)@-y85qd^!a6(pmltq1jk0$1z=j#-y2z@#du6h=&gd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,7 +53,6 @@ INSTALLED_APPS = [
     'rest_auth',
     'djoser',
     # apps
-    'accounts',
 
 
 ]
@@ -69,11 +78,7 @@ REST_FRAMEWORK = {
 
 
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'aselalybaeva42@gmail.com'
-EMAIL_HOST_PASSWORD = 'kyrgyzstanlove04A'
-EMAIL_PORT = 587
+
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
